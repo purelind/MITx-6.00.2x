@@ -10,4 +10,6 @@ def powerSet(items):
                 combo.append(items[j])
         yield combo
 
-print(list(powerSet([1,2,3])))
+print(list(powerSet([1, 2, 3])))
+
+
