@@ -87,22 +87,47 @@ def brute_force_cow_transport(cows,limit=10):
     1. Enumerate all possible ways that the cows can be divided into separate trips
     2. Select the allocation that minimizes the number of trips without making any trip
         that does not obey the weight limitation
-            
+
     Does not mutate the given dictionary of cows.
 
     Parameters:
     cows - a dictionary of name (string), weight (int) pairs
     limit - weight limit of the spaceship (an int)
-    
+
     Returns:
     A list of lists, with each inner list containing the names of cows
     transported on a particular trip and the overall list containing all the
     trips
     """
     # TODO: Your code here
-    pass
+    #: {"Jesse": 6, "Maybel": 3, "Callie": 2, "Maggie": 5}
+    # for plan in get_partitions(cows.items()):
+    sorted_plan_list = sorted([plan for plan in get_partitions(cows.items())], key=len)
 
-        
+    for plan in sorted_plan_list:
+        all_is_well = True
+        for trip_plan in plan:
+            total_weight = 0
+            trip_ok = True
+
+            #: single trip whether overweight.
+            for name, weight in trip_plan:
+                if total_weight + weight <= limit:
+                    total_weight += weight
+                else:
+                    trip_ok = False
+                    break
+            if not trip_ok:
+                all_is_well = False
+                break
+            else:
+                continue
+        if all_is_well:
+            return plan
+        else:
+            continue
+
+
 # Problem 3
 def compare_cow_transport_algorithms():
     """
@@ -127,11 +152,15 @@ Do not submit this along with any of your answers. Uncomment the last two
 lines to print the result of your problem.
 """
 
-cows = load_cows("ps1_cow_data.txt")
-limit=100
-print(cows)
+# cows = load_cows("ps1_cow_data.txt")
+# limit=100
+# print(cows)
+#
+# print(greedy_cow_transport(cows, limit))
+# print(brute_force_cow_transport(cows, limit))
 
-print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport(cows, limit))
 
+if __name__ == '__main__':
+    cows = {'Boo': 20, 'Milkshake': 40, 'MooMoo': 50, 'Miss Bella': 25, 'Lotus': 40, 'Horns': 25}
+    print(brute_force_cow_transport(cows, 100))
 
