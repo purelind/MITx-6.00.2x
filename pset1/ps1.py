@@ -56,15 +56,26 @@ def greedy_cow_transport(cows,limit=10):
     """
     # TODO: Your code here
     #: {"Jesse": 6, "Maybel": 3, "Callie": 2, "Maggie": 5}
-    weight_count = {}
-    for key, value in cows:
-        if None == weight_count.get(value):
-            weight_count[value] = [key]
-        else:
-            weight_count[value].append(key)
+    import operator
+    sorted_cows = sorted(cows.items(), key=operator.itemgetter(1), reverse=True)
 
+    alreay_triped = set()
+    result = []
 
-    pass
+    while len(alreay_triped) < len(sorted_cows):
+        trip_res = []
+        trip_weight = 0
+        for i in range(len(sorted_cows)):
+            name, weight = sorted_cows[i][0], sorted_cows[i][1]
+            if name not in alreay_triped:
+                if trip_weight + weight <= limit:
+                    alreay_triped.add(name)
+                    trip_res.append(name)
+                    trip_weight += weight
+        if trip_res:
+            result.append(trip_res)
+
+    return result
 
 
 # Problem 2

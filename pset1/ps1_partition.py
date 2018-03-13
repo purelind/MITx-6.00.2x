@@ -23,3 +23,6 @@ def get_partitions(set_):
 
 #for item in (get_partitions(['a','b','c','d'])):
 #     print(item)
+
+if __name__ == '__main__':
+    print(list(get_partitions({1,2,3})))
