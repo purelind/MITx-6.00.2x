@@ -143,7 +143,17 @@ def compare_cow_transport_algorithms():
     Does not return anything.
     """
     # TODO: Your code here
-    pass
+    cows = {'Boo': 20, 'Milkshake': 40, 'MooMoo': 50, 'Miss Bella': 25, 'Lotus': 40, 'Horns': 25}
+    start_greedy = time.time()
+    greedy_cow_transport(cows, 100)
+    end_greedy = time.time()
+
+    start_brute = time.time()
+    brute_force_cow_transport(cows, 100)
+    end_brute = time.time()
+
+    res = (end_brute-start_brute) > (end_greedy-start_greedy)
+    print("greedy faster then brute: %s" % res)
 
 
 """
@@ -161,6 +171,6 @@ lines to print the result of your problem.
 
 
 if __name__ == '__main__':
-    cows = {'Boo': 20, 'Milkshake': 40, 'MooMoo': 50, 'Miss Bella': 25, 'Lotus': 40, 'Horns': 25}
-    print(brute_force_cow_transport(cows, 100))
-
+    # cows = {'Boo': 20, 'Milkshake': 40, 'MooMoo': 50, 'Miss Bella': 25, 'Lotus': 40, 'Horns': 25}
+    # print(brute_force_cow_transport(cows, 100))
+    compare_cow_transport_algorithms()
